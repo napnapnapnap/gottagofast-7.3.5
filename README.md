@@ -2,7 +2,7 @@
 
 This README documents all the custom features, fixes, and enhancements that have been added to the original `GottaGoFast` and `GottaGoFastHistory` addons.
 
-## 🏃 GottaGoFast (Core Addon)
+##  GottaGoFast (Core Addon)
 
 ### Mythic+ Enemy Nameplate Points
 * **Live Nameplate Values**: Added a brand new `Nameplates.lua` system that dynamically attaches the exact Mythic+ percentage/points each enemy is worth directly to their floating nameplates above their heads.
@@ -14,7 +14,7 @@ This README documents all the custom features, fixes, and enhancements that have
 
 ---
 
-## 📜 GottaGoFastHistory
+##  GottaGoFastHistory
 
 ### 1. The "Group Summary" Tab
 * **Party Cross-Referencing**: Added a new "Group Summary" tab to the `/ggfh` UI. It actively scans your current party/raid members and queries your entire run history database to display the last 5 Mythic+ runs you've done with each of them.
