@@ -10,12 +10,16 @@ This README documents all the custom features, fixes, and enhancements that have
 * **Currently Pulled Tracker**: Runs a lightweight background scanner (every 0.2 seconds) that tracks all enemies you currently have in combat. It automatically calculates the projected completion percentage and live-injects it into your main CM objective tracker.
 * **Test Mode**: Added the `/ggftest` slash command. This toggles a mock testing environment so you can safely test and configure your nameplate points outside of an active Mythic+ keystone.
 
+<img width="928" height="355" alt="image" src="https://github.com/user-attachments/assets/26c14953-34ef-4543-819d-d4bcb9acb0b5" />
+
 ---
 
 ## 📜 GottaGoFastHistory
 
 ### 1. The "Group Summary" Tab
 * **Party Cross-Referencing**: Added a new "Group Summary" tab to the `/ggfh` UI. It actively scans your current party/raid members and queries your entire run history database to display the last 5 Mythic+ runs you've done with each of them.
+
+<img width="955" height="588" alt="image" src="https://github.com/user-attachments/assets/77e5762a-5fdc-4715-93c6-3b2c83355cb2" />
 
 ### 2. Ignored Player Alerts & Warnings
 * **Roster Scanner**: Intercepts the `GROUP_ROSTER_UPDATE` event. Whenever a player joins your party, it secretly scans them (and their cross-realm server variants) against your native WoW Ignore List.
@@ -26,4 +30,7 @@ This README documents all the custom features, fixes, and enhancements that have
 ### 3. Quick-Access Tooltip & /who Integrations
 * **UnitFrame Tooltip Integration**: While holding the **Shift** key, hovering over another player's unit frame or 3D model will instantly scan your database and append a summary of the last 3 Mythic+ runs you completed with them directly onto their tooltip (including the dungeon, key level, date, and completion time).
 * **`/who` Search Integration**: Hooks into the WoW chat system so that whenever you run a `/who PlayerName` command, if you have run with that player in the past, it will seamlessly inject a green history summary underneath their `/who` result in your chat box.
+
+<img width="537" height="207" alt="image" src="https://github.com/user-attachments/assets/0a9b643b-b27e-4546-a851-7f2a16de47af" />
+
 
