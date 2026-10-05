@@ -33,5 +33,9 @@ This README documents all the custom features, fixes, and enhancements that have
 * **History Panel Warning**: Actively flags ignored players in the Group Summary UI by injecting a bright red `[IGNORED]` tag next to their name.
 * **Toggleable**: Built straight into the standard WoW Interface Options. You can disable this scanner via `Escape -> Interface -> AddOns -> GottaGoFast History -> Alert on Ignored Player`.
 
-### 3. Native Escape-to-Close
+### 3. Quick-Access Tooltip & /who Integrations
+* **UnitFrame Tooltip Integration**: While holding the **Shift** key, hovering over another player's unit frame or 3D model will instantly scan your database and append a summary of the last 3 Mythic+ runs you completed with them directly onto their tooltip (including the dungeon, key level, date, and completion time).
+* **`/who` Search Integration**: Hooks into the WoW chat system so that whenever you run a `/who PlayerName` command, if you have run with that player in the past, it will seamlessly inject a green history summary underneath their `/who` result in your chat box.
+
+### 4. Native Escape-to-Close
 * **UI Integration**: Injected the `GottaGoFastHistory` AceGUI frame into WoW's native `UISpecialFrames` table. You can now seamlessly close the `/ggfh` history panel by simply hitting the **Escape** key on your keyboard, just like the spellbook or character panel.
