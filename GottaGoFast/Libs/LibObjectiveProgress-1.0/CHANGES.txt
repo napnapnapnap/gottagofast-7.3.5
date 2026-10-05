@@ -1,0 +1,31 @@
+changeset:   26:d63c7a1809c4
+tag:         v1.2.5
+user:        MMOSimca
+date:        Sun Sep 10 05:10:30 2017 -0400
+summary:     And another missing right bracket, oops.
+
+
+changeset:   25:31c605a54571
+user:        MMOSimca
+date:        Fri Sep 08 23:13:42 2017 -0400
+summary:     Fixed error in output (missing right bracket).
+
+
+changeset:   24:0588965677b1
+user:        MMOSimca
+date:        Wed Sep 06 23:34:44 2017 -0400
+summary:     Added Mythic+ data for Seat of Triumvirate and initial QuestData for Patch 7.3.0.
+
+
+changeset:   23:094fd340f572
+user:        MMOSimca
+date:        Wed Sep 06 05:27:49 2017 -0400
+summary:     Updated TOC for Patch 7.3.0. Readded automatic project revision counter now that Curse has fixed library packaging.
+
+
+changeset:   22:b26873f66458
+user:        MMOSimca
+date:        Wed Jul 12 11:10:34 2017 -0400
+summary:     Patch 7.2.5 data update for Mythic+ - looks like no actual changes, just resorting.
+
+
