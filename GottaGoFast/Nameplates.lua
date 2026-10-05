@@ -40,7 +40,12 @@ local function UpdateNameplate(unit)
         end
     end
     
-    if weight and weight > 0 then
+    local enabled = true
+    if ggf.GetNameplateEnabled then
+        enabled = ggf.GetNameplateEnabled(nil)
+    end
+    
+    if enabled and weight and weight > 0 then
         local fs = fontStrings[nameplate]
         local visual = nameplate.unitFrame or nameplate.kui or nameplate.extended or nameplate.UnitFrame or nameplate
         if not fs then
@@ -50,12 +55,18 @@ local function UpdateNameplate(unit)
         
         local x = ggf.GetNameplateX and ggf.GetNameplateX(nil) or -30
         local y = ggf.GetNameplateY and ggf.GetNameplateY(nil) or 0
+        local textAnchor = ggf.GetNameplateTextAnchor and ggf.GetNameplateTextAnchor(nil) or "LEFT"
+        local healthAnchor = ggf.GetNameplateHealthAnchor and ggf.GetNameplateHealthAnchor(nil) or "RIGHT"
+        local fontSize = ggf.GetNameplateFontSize and ggf.GetNameplateFontSize(nil) or 9
+        
+        local font, _, flags = fs:GetFont()
+        fs:SetFont(font, fontSize, flags or "OUTLINE")
         
         fs:ClearAllPoints()
         if visual.Health then
-            fs:SetPoint("LEFT", visual.Health, "RIGHT", x, y)
+            fs:SetPoint(textAnchor, visual.Health, healthAnchor, x, y)
         else
-            fs:SetPoint("LEFT", visual, "RIGHT", x, y)
+            fs:SetPoint(textAnchor, visual, healthAnchor, x, y)
         end
         
         local text = string.format("%.2f%%", weight)
@@ -66,6 +77,10 @@ local function UpdateNameplate(unit)
         fs:SetText(text)
         fs:SetTextColor(1, 1, 1)
         fs:Show()
+    else
+        if fontStrings[nameplate] then
+            fontStrings[nameplate]:Hide()
+        end
     end
 end
 
@@ -163,17 +178,29 @@ C_Timer.NewTicker(0.2, function()
     
     local x = ggf.GetNameplateX and ggf.GetNameplateX(nil) or -30
     local y = ggf.GetNameplateY and ggf.GetNameplateY(nil) or 0
-    if ggf.lastNameplateX ~= x or ggf.lastNameplateY ~= y then
+    local size = ggf.GetNameplateFontSize and ggf.GetNameplateFontSize(nil) or 9
+    local textAnchor = ggf.GetNameplateTextAnchor and ggf.GetNameplateTextAnchor(nil) or "LEFT"
+    local healthAnchor = ggf.GetNameplateHealthAnchor and ggf.GetNameplateHealthAnchor(nil) or "RIGHT"
+    
+    if ggf.lastNameplateX ~= x or ggf.lastNameplateY ~= y or ggf.lastNameplateSize ~= size or ggf.lastTextAnchor ~= textAnchor or ggf.lastHealthAnchor ~= healthAnchor then
         ggf.lastNameplateX = x
         ggf.lastNameplateY = y
+        ggf.lastNameplateSize = size
+        ggf.lastTextAnchor = textAnchor
+        ggf.lastHealthAnchor = healthAnchor
+        
         for nameplate, fs in pairs(fontStrings) do
             if fs:IsShown() then
+                local font, _, flags = fs:GetFont()
+                if not font then font = STANDARD_TEXT_FONT or "Fonts\\FRIZQT__.TTF" end
+                fs:SetFont(font, size, flags or "OUTLINE")
+                
                 local visual = nameplate.unitFrame or nameplate.kui or nameplate.extended or nameplate.UnitFrame or nameplate
                 fs:ClearAllPoints()
                 if visual.Health then
-                    fs:SetPoint("LEFT", visual.Health, "RIGHT", x, y)
+                    fs:SetPoint(textAnchor, visual.Health, healthAnchor, x, y)
                 else
-                    fs:SetPoint("LEFT", visual, "RIGHT", x, y)
+                    fs:SetPoint(textAnchor, visual, healthAnchor, x, y)
                 end
             end
         end

@@ -381,3 +381,36 @@ function GottaGoFast.SetNameplateY(info, value)
   if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
 end
 
+
+function GottaGoFast.GetNameplateEnabled(info)
+  return GottaGoFast.db.profile.NameplateEnabled;
+end
+function GottaGoFast.SetNameplateEnabled(info, value)
+  GottaGoFast.db.profile.NameplateEnabled = value;
+  if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
+end
+
+function GottaGoFast.GetNameplateTextAnchor(info)
+  return GottaGoFast.db.profile.NameplateTextAnchor;
+end
+function GottaGoFast.SetNameplateTextAnchor(info, value)
+  GottaGoFast.db.profile.NameplateTextAnchor = value;
+  if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
+end
+
+function GottaGoFast.GetNameplateHealthAnchor(info)
+  return GottaGoFast.db.profile.NameplateHealthAnchor;
+end
+function GottaGoFast.SetNameplateHealthAnchor(info, value)
+  GottaGoFast.db.profile.NameplateHealthAnchor = value;
+  if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
+end
+
+function GottaGoFast.GetNameplateFontSize(info)
+  return GottaGoFast.db.profile.NameplateFontSize;
+end
+function GottaGoFast.SetNameplateFontSize(info, value)
+  GottaGoFast.db.profile.NameplateFontSize = value;
+  if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
+end
+

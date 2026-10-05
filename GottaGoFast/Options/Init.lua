@@ -37,8 +37,12 @@ function GottaGoFast.InitOptions()
       IndividualMobValue = true,
       ObjectiveCompleteInObjectives = true,
       TimerTooltip = true,
+      NameplateEnabled = true,
+      NameplateTextAnchor = "LEFT",
+      NameplateHealthAnchor = "RIGHT",
       NameplateX = -30,
       NameplateY = 0,
+      NameplateFontSize = 9,
       History = {},
       DebugMode = false,
       Version = 0,
@@ -233,21 +237,75 @@ function GottaGoFast.InitOptions()
             get = GottaGoFast.GetObjectiveY,
             set = GottaGoFast.SetObjectiveY,
           },
+          DemoMode = {
+            order = 19,
+            type = "execute",
+            name = "Demo Mode",
+            desc = "Shows GottaGoFast Outside CM For Demo / Setup Purposes",
+            func = GottaGoFast.ToggleDemoMode,
+          },
+        },
+      },
+      displayNameplates = {
+        name = "Display: Nameplates",
+        type = "group",
+        args = {
+          NameplateEnabled = {
+            order = 1,
+            type = "toggle",
+            name = "Show Nameplate Percentages",
+            desc = "Toggle nameplate percentages",
+            get = GottaGoFast.GetNameplateEnabled,
+            set = GottaGoFast.SetNameplateEnabled,
+          },
+          NameplateDesc = {
+            order = 2,
+            type = "description",
+            name = "Position changes apply immediately to visible nameplates. Default: 8 pixels to the right of the health bar. X moves right/left; Y moves up/down.",
+          },
+          NameplateTextAnchor = {
+            order = 3,
+            type = "select",
+            name = "Text Anchor",
+            values = {
+              ["LEFT"] = "Left",
+              ["RIGHT"] = "Right",
+              ["TOP"] = "Top",
+              ["BOTTOM"] = "Bottom",
+              ["CENTER"] = "Center",
+            },
+            get = GottaGoFast.GetNameplateTextAnchor,
+            set = GottaGoFast.SetNameplateTextAnchor,
+          },
+          NameplateHealthAnchor = {
+            order = 4,
+            type = "select",
+            name = "Health Bar Anchor",
+            values = {
+              ["LEFT"] = "Left",
+              ["RIGHT"] = "Right",
+              ["TOP"] = "Top",
+              ["BOTTOM"] = "Bottom",
+              ["CENTER"] = "Center",
+            },
+            get = GottaGoFast.GetNameplateHealthAnchor,
+            set = GottaGoFast.SetNameplateHealthAnchor,
+          },
           NameplateX = {
-            order = 7,
+            order = 5,
             type = "range",
-            name = "Nameplate % X Offset",
+            name = "Horizontal Offset (X)",
             desc = "Default: -30",
-            min = -200,
-            max = 200,
+            min = -300,
+            max = 300,
             step = 1,
             get = GottaGoFast.GetNameplateX,
             set = GottaGoFast.SetNameplateX,
           },
           NameplateY = {
-            order = 8,
+            order = 6,
             type = "range",
-            name = "Nameplate % Y Offset",
+            name = "Vertical Offset (Y)",
             desc = "Default: 0",
             min = -200,
             max = 200,
@@ -255,12 +313,46 @@ function GottaGoFast.InitOptions()
             get = GottaGoFast.GetNameplateY,
             set = GottaGoFast.SetNameplateY,
           },
-          DemoMode = {
-            order = 19,
+          NameplateFontSize = {
+            order = 7,
+            type = "range",
+            name = "Font Size",
+            desc = "Default: 9",
+            min = 8,
+            max = 32,
+            step = 1,
+            get = GottaGoFast.GetNameplateFontSize,
+            set = GottaGoFast.SetNameplateFontSize,
+          },
+          TestNameplates = {
+            order = 8,
+            type = "toggle",
+            name = "Test Nameplate Percentages",
+            desc = "Enable testing mode",
+            get = function(info) return GottaGoFast.testMode end,
+            set = function(info, val)
+              GottaGoFast.testMode = val
+              if val then
+                print("|cff00ff00GottaGoFast:|r Nameplate testing mode ENABLED.")
+              else
+                print("|cffff0000GottaGoFast:|r Nameplate testing mode DISABLED.")
+              end
+              if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
+            end,
+          },
+          ResetNameplates = {
+            order = 9,
             type = "execute",
-            name = "Demo Mode",
-            desc = "Shows GottaGoFast Outside CM For Demo / Setup Purposes",
-            func = GottaGoFast.ToggleDemoMode,
+            name = "Reset Nameplate Settings",
+            func = function()
+              GottaGoFast.db.profile.NameplateEnabled = true
+              GottaGoFast.db.profile.NameplateTextAnchor = "LEFT"
+              GottaGoFast.db.profile.NameplateHealthAnchor = "RIGHT"
+              GottaGoFast.db.profile.NameplateX = -30
+              GottaGoFast.db.profile.NameplateY = 0
+              GottaGoFast.db.profile.NameplateFontSize = 9
+              if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
+            end,
           },
         },
       },
