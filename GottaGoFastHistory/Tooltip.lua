@@ -89,13 +89,36 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self)
     end
 end)
 
+local lastWhoQuery = nil
+local lastWhoTime = 0
+hooksecurefunc("SendWho", function(text)
+    if type(text) == "string" and text ~= "" then
+        lastWhoQuery = text
+        lastWhoTime = GetTime()
+    end
+end)
+
 ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", function(self, event, msg, ...)
     local rawName = string.match(msg, "|Hplayer:[^|]+|h%[([^%]]+)%]|h: Level") or string.match(msg, "^%[([^%]]+)%]: Level")
+    local name = nil
+    
     if rawName then
-        local name = strsplit("-", rawName)
+        name = strsplit("-", rawName)
+    elseif string.match(msg, "^0 ") and (string.find(msg, "total") or string.find(msg, "player")) then
+        if lastWhoQuery and (GetTime() - lastWhoTime < 2) then
+            local q = lastWhoQuery
+            if string.match(q, "^[a-z]%-") then
+                q = string.sub(q, 3)
+            end
+            q = string.gsub(q, '"', '')
+            name = strsplit("-", q)
+        end
+    end
+
+    if name then
         local runsWithPlayer = GetRecentRuns(name)
         if runsWithPlayer then
-            local out = "GGF History: Last 3 M+ with " .. name .. " - "
+            local out = "|cff00ff00GGF History: Last 3 M+ with " .. name .. ":"
             for i = 1, math.min(3, #runsWithPlayer) do
                 local run = runsWithPlayer[i]
                 local cTime = ggf.CalculateRunTime(run.startTime, run.endTime, run.deaths, run.corrupt)
@@ -112,9 +135,10 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", function(self, event, msg, ..
                     dateStr = string.format(" %02d/%02d/%02d", ts.month, ts.day, shortYear)
                 end
                 
-                out = out .. string.format("[%s (+%d)%s in %s] ", run.dungeonName, run.level, dateStr, timeStr)
+                out = out .. "\n  - " .. string.format("[%s (+%d)%s in %s]", run.dungeonName, run.level, dateStr, timeStr)
             end
-            return false, msg .. "\n|cff00ff00" .. out .. "|r", ...
+            out = out .. "|r"
+            return false, msg .. "\n" .. out, ...
         end
     end
     return false, msg, ...
