@@ -10,7 +10,7 @@ This README documents all the custom features, fixes, and enhancements that have
 * **Currently Pulled Tracker**: Runs a lightweight background scanner (every 0.2 seconds) that tracks all enemies you currently have in combat. It automatically calculates the projected completion percentage and live-injects it into your main CM objective tracker.
 * **Test Mode**: Added the `/ggftest` slash command. This toggles a mock testing environment so you can safely test and configure your nameplate points outside of an active Mythic+ keystone.
 
-<img width="928" height="355" alt="image" src="https://github.com/user-attachments/assets/26c14953-34ef-4543-819d-d4bcb9acb0b5" />
+<img width="569" height="216" alt="image" src="https://github.com/user-attachments/assets/1aef3d58-7d73-49d7-a781-2184f562790e" />
 
 ---
 
