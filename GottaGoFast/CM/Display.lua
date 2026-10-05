@@ -120,7 +120,7 @@ function GottaGoFast.UpdateCMObjectives()
         local totalPercent = currentPercent + GottaGoFast.CurrentPulledWeight
         local pulledStr = string.format("Pulled: %.2f%% (Total: %.2f%%)", GottaGoFast.CurrentPulledWeight, totalPercent)
         
-        if GottaGoFast.CurrentPulledPoints and GottaGoFast.CurrentPulledPoints > 0 then
+        if GottaGoFast.GetMobPoints and GottaGoFast.GetMobPoints(nil) and GottaGoFast.CurrentPulledPoints and GottaGoFast.CurrentPulledPoints > 0 then
             local totalPoints = curValue + GottaGoFast.CurrentPulledPoints
             pulledStr = pulledStr .. string.format(" [%.2f (Total: %.2f)]", GottaGoFast.CurrentPulledPoints, totalPoints)
         end

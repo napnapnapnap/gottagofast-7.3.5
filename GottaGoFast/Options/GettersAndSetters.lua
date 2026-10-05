@@ -362,3 +362,22 @@ function GottaGoFast.History()
   local dataString = GottaGoFast:Serialize(data);
   GottaGoFast:SendCommMessage(constants.HistoryPrefix, dataString, "WHISPER", GetUnitName("player"), "ALERT")
 end
+
+function GottaGoFast.GetNameplateX(info)
+  return GottaGoFast.db.profile.NameplateX;
+end
+
+function GottaGoFast.SetNameplateX(info, value)
+  GottaGoFast.db.profile.NameplateX = value;
+  if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
+end
+
+function GottaGoFast.GetNameplateY(info)
+  return GottaGoFast.db.profile.NameplateY;
+end
+
+function GottaGoFast.SetNameplateY(info, value)
+  GottaGoFast.db.profile.NameplateY = value;
+  if GottaGoFast.UpdateNameplates then GottaGoFast.UpdateNameplates() end
+end
+
